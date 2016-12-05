@@ -1,0 +1,12 @@
+.red{
+  color: #FF0000;
+}
+.green {
+  color: #008000;
+}
+.red-box{
+  border: solid 1px #FF0000;
+}
+.green-box {
+  border: solid 1px #008000;
+}
