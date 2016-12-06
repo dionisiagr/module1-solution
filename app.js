@@ -8,34 +8,45 @@
   function LunchCheckController($scope) {
     $scope.lunchMenu = "";
     $scope.message = "";
+    $scope.classMessage = "";
+    $scope.classBox = "";
 
     $scope.displayMessage = function () {
-      var messageValue = calculatMessage($scope.lunchMenu);
-      $scope.message = messageValue;
+      var messageValue = $scope.lunchMenu;
+      if (messageValue.trim().length == 0 ) {
+        $scope.classMessage = "red";
+        $scope.classBox = "red-box";
+        $scope.message = "Please enter data first";
+      }else{
+
+        $scope.classMessage = "green";
+        $scope.classBox = "green-box";
+        var arrayOfStrings = messageValue.split(/[\s,]+/);
+        if (arrayOfStrings.length <= 3){
+          $scope.message = "Enjoy!";
+        }else {
+          $scope.message = "Too much!";
+        }
+      }
+
     };
   }
 
-  function calculatMessage(string) {
+  function calculateMessage(string) {
        if (string.trim().length == 0 ) {
-         addColors( '#lunch-menu', 'green-box', 'red-box');
-         addColors( '#div1', 'green', 'red');
+  //       $scope.classMessage = "red";
+  //       $scope.classBox = "red-box";
          return "Please enter data first";
        }
 
-       addColors( '#lunch-menu', 'red-box', 'green-box');
-       addColors( '#div1', 'red', 'green');
+  //     $scope.classMessage = "green";
+  //     $scope.classBox = "green-box";
        var arrayOfStrings = string.split(/[\s,]+/);
        if (arrayOfStrings.length <= 3){
          return "Enjoy!";
        }else {
          return "Too much!";
        }
-  }
-
-  function addColors(id, oldClass, newClass){
-    var myEl = angular.element( document.querySelector(id ) );
-    myEl.removeClass(oldClass);
-    myEl.addClass(newClass);
   }
 
 
